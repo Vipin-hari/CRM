@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">CRM</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="/customers">Customers</a></li>
+                <li class="nav-item"><a class="nav-link" href="/sales">Sales</a></li>
+                <li class="nav-item"><a class="nav-link" href="/support-tickets">Support Tickets</a></li>
+                <li class="nav-item"><a class="nav-link" href="/sales-report">Sales Report</a></li>
+            </ul>
+            {% if current_user.is_authenticated %}
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+                </ul>
+            {% else %}
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
+                </ul>
+            {% endif %}
+        </div>
+    </nav>
+    <div class="container mt-4">
+        <h1>Customer Details</h1>
+        <table class="table table-bordered">
+            <tr>
+                <th>ID</th>
+                <td>{{ customer.id }}</td>
+            </tr>
+            <tr>
+                <th>First Name</th>
+                <td>{{ customer.first_name }}</td>
+            </tr>
+            <tr>
+                <th>Last Name</th>
+                <td>{{ customer.last_name }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ customer.email }}</td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td>{{ customer.phone }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ customer.address }}</td>
+            </tr>
+            <tr>
+                <th>Date of Birth</th>
+                <td>{{ customer.date_of_birth }}</td>
+            </tr>
+            <tr>
+                <th>Date Created</th>
+                <td>{{ customer.date_created }}</td>
+            </tr>
+        </table>
+        <a href="/customers" class="btn btn-primary">Back to Customers</a>
+        <a href="/edit-customer/{{ customer.id }}" class="btn btn-warning">Edit Customer</a>
+    </div>
+</body>
+</html>

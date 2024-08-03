@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Report</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            padding-top: 56px; /* Adjust for fixed navbar */
+        }
+        .container {
+            margin-top: 20px;
+        }
+        table {
+            margin-top: 20px;
+        }
+        th, td {
+            text-align: center;
+        }
+        thead {
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            margin-bottom: 20px;
+        }
+        .navbar-brand {
+            font-size: 1.5rem;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <a class="navbar-brand" href="/">CRM</a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item"><a class="nav-link" href="/customers">Customers</a></li>
+            <li class="nav-item"><a class="nav-link" href="/sales">Sales</a></li>
+            <li class="nav-item"><a class="nav-link" href="/support-tickets">Support Tickets</a></li>
+            <li class="nav-item"><a class="nav-link" href="/sales-report">Sales Report</a></li>
+        </ul>
+        {% if current_user.is_authenticated %}
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+            </ul>
+        {% else %}
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
+            </ul>
+        {% endif %}
+    </div>
+  </nav>
+  <div class="container">
+      <h1>Sales Report</h1>
+      <p class="lead">Total Sales: ${{ total_sales }}</p>
+      <table class="table table-striped table-bordered">
+          <thead>
+              <tr>
+                  <th>ID</th>
+                  <th>Customer ID</th>
+                  <th>Sale Date</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+              </tr>
+          </thead>
+          <tbody>
+              {% for sale in sales %}
+              <tr>
+                  <td>{{ sale.id }}</td>
+                  <td>{{ sale.customer_id }}</td>
+                  <td>{{ sale.sale_date.strftime('%Y-%m-%d') }}</td>
+                  <td>${{ sale.amount }}</td>
+                  <td>{{ sale.status }}</td>
+              </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+  </div>
+</body>
+</html>

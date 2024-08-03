@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Support Ticket</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">CRM</a>
+        <!-- Navbar links here -->
+    </nav>
+    <div class="container mt-4">
+        <h1>Create Support Ticket</h1>
+        <form action="/support-tickets/create" method="POST">
+            <div class="form-group">
+                <label for="creation_date">Creation Date:</label>
+                <input type="date" id="creation_date" name="creation_date" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="issue_description">Issue Description:</label>
+                <textarea id="issue_description" name="issue_description" class="form-control" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="status">Status:</label>
+                <input type="text" id="status" name="status" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Create Ticket</button>
+        </form>
+        <a href="/support-tickets" class="btn btn-secondary mt-3">Back to Support Tickets</a>
+    </div>
+</body>
+</html>
+
