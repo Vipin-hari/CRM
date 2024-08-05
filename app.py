@@ -186,28 +186,6 @@ def sales_report():
     total_sales = sum(sale.amount for sale in sales)
     return render_template('sales_report.html', total_sales=total_sales, sales=sales)
 
-@app.route('/sales/create', methods=['GET', 'POST'])
-@login_required
-def create_sale():
-    if not current_user.is_admin:
-        flash('You do not have permission to create sales.', 'danger')
-        return redirect(url_for('index'))
-
-    if request.method == 'POST':
-        new_sale = Sale(
-            customer_id=request.form['customer_id'],
-            sale_date=datetime.strptime(request.form['sale_date'], '%Y-%m-%d').date(),
-            amount=request.form['amount'],
-            status=request.form['status']
-        )
-        db.session.add(new_sale)
-        db.session.commit()
-        flash('Sale created successfully!', 'success')
-        return redirect(url_for('sales'))
-
-    customers = Customer.query.all()
-    return render_template('create_sale.html', customers=customers)
-
 @app.route('/support-tickets/create', methods=['GET', 'POST'])
 @login_required
 def create_support_ticket():
